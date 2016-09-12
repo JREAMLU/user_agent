@@ -63,11 +63,20 @@ func (p *UserAgent) detectBrowser(sections []section) {
 					p.browser.Name = "Opera"
 					p.browser.Version = sections[slen-1].version
 				default:
-					if sections[5].name == "QIHU" || sections[5].name == "360EE" || sections[5].name == "360SE" {
-						p.browser.Name = "360Browser"
-					} else if sections[5].name == "QQBrowser" {
-						p.browser.Name = "QQbrowser"
+					if (len(sections) > 5 && sections[5].name == "QIHU") || (len(sections) > 5 && sections[5].name == "360EE") || (len(sections) > 5 && sections[5].name == "360SE") {
+						p.browser.Name = "360"
+					} else if len(sections) > 5 && sections[5].name == "QQBrowser" {
+						p.browser.Name = "QQ"
 						p.browser.Version = sections[5].version
+					} else if len(sections) > 4 && sections[4].name == "SE" {
+						p.browser.Name = "sougou"
+						p.browser.Version = sections[4].version
+					} else if len(sections) > 4 && sections[4].name == "2345Explorer" {
+						p.browser.Name = "2345"
+						p.browser.Version = sections[4].version
+					} else if len(sections) > 4 && sections[4].name == "LBBROWSER" {
+						p.browser.Name = "liebao"
+						p.browser.Version = sections[4].version
 					} else if sections[2].name == "Chrome" {
 						p.browser.Name = "Chrome"
 					} else if sections[3].name == "MQQBrowser" {
